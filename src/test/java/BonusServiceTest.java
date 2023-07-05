@@ -1,5 +1,5 @@
-import br.com.NexusSolutions.Agendamento.BonusService;
-import br.com.NexusSolutions.Agendamento.Funcionario;
+import br.com.NexusSolutions.BonusService;
+import br.com.NexusSolutions.Funcionario;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,10 +9,18 @@ import java.time.LocalDate;
 public class BonusServiceTest {
     @Test
     public void bonusDeveriaSerZeroParaFuncionarioComSalarioMuitoAlto() {
-        BigDecimal resultado = BonusService.calcularBonus(
-                new Funcionario("Rodrigo", LocalDate.now(),
-                        new BigDecimal("25000")));
-        Assert.assertEquals(new BigDecimal("0.00"), resultado);
+        BonusService service = new BonusService();
+//        Assert.assertThrows(IllegalArgumentException.class,
+//                () -> service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(),
+//                        new BigDecimal("25000"))));
+        try {
+            service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(),
+                    new BigDecimal("25000")));
+            Assert.fail("nao deu exception");
+        } catch (Exception erro) {
+            Assert.assertEquals(" funcionarios com salario maior que R$1000 reais nao podem receber bonus",
+                    erro.getMessage());
+        }
     }
 
     @Test

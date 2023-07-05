@@ -1,6 +1,7 @@
-package br.com.NexusSolutions.Agendamento;
+package br.com.NexusSolutions;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 public class Funcionario {
@@ -28,7 +29,13 @@ public class Funcionario {
     }
 
     public void reajustarSalario(BigDecimal reajuste) {
-        this.salario =  this.salario .add(reajuste);
+        this.salario = this.salario.add(reajuste);
+        reajusteCasasDecimais();
     }
+
+    private void reajusteCasasDecimais() {
+        this.salario = salario.setScale(2, RoundingMode.HALF_UP);
+    }
+
 }
 

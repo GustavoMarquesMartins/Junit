@@ -1,4 +1,4 @@
-package br.com.NexusSolutions.Agendamento;
+package br.com.NexusSolutions;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
